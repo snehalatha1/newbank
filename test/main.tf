@@ -1,23 +1,18 @@
-resource "aws_instance" "test-server" {
+resource "aws_instance" "ec2-server" {
   ami           = "ami-02eb7a4783e7e9317" 
-  instance_type = "t2.micro" 
-  vpc_security_group_ids= ["sg-0582eef8724bb4229"]
+  instance_type = "t2.micro"
+  key_name = "mykey"
+  vpc_security_group_ids= ["sg-00fd2fb52aa7dd027"]
   connection {
     type     = "ssh"
     user     = "ubuntu"
-    private_key = file("./newkeypair.pem")
+    private_key = file("./mykey.pem")
     host     = self.public_ip
   }
-  provisioner "remote-exec" {
-    inline = [ "echo 'wait to start instance' "]
-  }
   tags = {
-    Name = "test-server"
+    Name = "TF-server"
   }
   provisioner "local-exec" {
-        command = " echo ${aws_instance.test-server.public_ip} > inventory "
+        command = " echo ${aws_instance.ec2-server.public_ip} > /home/ubuntu/inventory "
   }
-   provisioner "local-exec" {
-  command = "ansible-playbook /var/lib/jenkins/workspace/project2/bank-playbook.yml "
-  } 
 }
