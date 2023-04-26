@@ -13,6 +13,6 @@ resource "aws_instance" "ec2-server" {
     Name = "TF-server"
   }
   provisioner "local-exec" {
-        command = " echo ${aws_instance.ec2-server.public_ip} > /home/ubuntu/inventory "
+        command = " echo ${aws_instance.ec2-server.public_ip} > inventory "
   }
 }
