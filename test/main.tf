@@ -10,9 +10,12 @@ resource "aws_instance" "ec2-server" {
     host     = self.public_ip
   }
   tags = {
-    Name = "NEW SERVER"
+    Name = "terraform"
   }
   provisioner "local-exec" {
         command = " echo ${aws_instance.ec2-server.private_ip} > inventory "
   }
+  provisioner "local-exec" {
+    command = "ansible-playbook /var/lib/jenkins/workspace/banking/test/bank-playbook.yml "
+  } 
 }
