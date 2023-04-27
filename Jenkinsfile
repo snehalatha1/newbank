@@ -35,7 +35,7 @@ pipeline {
      }
      stage('push'){
          steps{
-             sh 'docker push snehalatha15/bank:latest'
+             sh 'docker push snehalatha15/project:latest'
          }
      }
  stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
