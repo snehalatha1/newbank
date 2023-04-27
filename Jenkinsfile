@@ -48,10 +48,5 @@ pipeline {
                 }
             }
     }
-   stage('deploy playbook'){
-         steps{
-             ansiblePlaybook credentialsId: 'an', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/banking/inventory', playbook: 'bank-playbook.yml'
-         }
-     }
         }
    }

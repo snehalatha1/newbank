@@ -10,9 +10,9 @@ resource "aws_instance" "ec2-server" {
     host     = self.public_ip
   }
   tags = {
-    Name = "TF-server"
+    Name = "NEW SERVER"
   }
   provisioner "local-exec" {
-        command = " echo ${aws_instance.ec2-server.public_ip} > inventory "
+        command = " echo ${aws_instance.ec2-server.private_ip} > inventory "
   }
 }
