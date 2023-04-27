@@ -20,7 +20,7 @@ pipeline {
      }  
      stage('publish Reports'){
                steps {
-               publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/bank/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])    
+               publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/banking/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])    
                 }
       }
       stage('Docker Image Creation'){
@@ -36,6 +36,21 @@ pipeline {
      stage('push'){
          steps{
              sh 'docker push snehalatha15/bank:latest'
+         }
+     }
+    stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
+            steps {
+                dir('test'){
+                sh 'sudo chmod 777 ./mykey.pem'
+                sh 'terraform init'
+                sh 'terraform validate'
+                sh 'terraform apply --auto-approve'
+                }
+            }
+    }
+   stage('deploy playbook'){
+         steps{
+             ansiblePlaybook credentialsId: 'an', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/banking/inventory', playbook: 'bank-playbook.yml'
          }
      }
         }
