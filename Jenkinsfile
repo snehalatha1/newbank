@@ -38,7 +38,7 @@ pipeline {
              sh 'docker push snehalatha15/bank:latest'
          }
      }
-    stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
+ stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
             steps {
                 sh 'chmod 700 mykey.pem'
                 sh 'terraform init'
@@ -48,8 +48,7 @@ pipeline {
             }
      stage('ansible'){
          steps{
-ansiblePlaybook credentialsId: 'key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/project/inventory', playbook: 'bank-playbook.yml'
-    }
-        }
+ansiblePlaybook credentialsId: 'key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/project/inventory', playbook: 'bank-playbook.yml}
 }
+   }
 }
