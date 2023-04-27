@@ -8,7 +8,7 @@ resource "aws_instance" "ec2-server" {
   ami           = "ami-02eb7a4783e7e9317"
   instance_type = "t2.micro"
   key_name = "mykey"
-  vpc_security_group_ids= ["sg-00fd2fb52aa7dd027"]ii
+  vpc_security_group_ids= ["sg-00fd2fb52aa7dd027"]
   connection {
     type     = "ssh"
     user     = "ubuntu"
