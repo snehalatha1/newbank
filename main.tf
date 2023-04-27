@@ -18,4 +18,7 @@ resource "aws_instance" "ec2-server" {
   tags = {
     Name = "terraform"
   }
+ provisioner "local-exec" {
+         command = "echo ${aws_instance.ec2-server.public_ip} > inventory"
+        }
 }
