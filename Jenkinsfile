@@ -40,7 +40,7 @@ pipeline {
      }
     stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
             steps {
-                sh 'sudo chmod 777 ./mykey.pem'
+                sh 'chmod 700 mykey.pem'
                 sh 'terraform init'
                 sh 'terraform validate'
                 sh 'terraform apply --auto-approve'
