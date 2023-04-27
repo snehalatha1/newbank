@@ -18,7 +18,6 @@ resource "aws_instance" "ec2-server" {
   tags = {
     Name = "terraform"
   }
-  }
   provisioner "local-exec" {
     command = "ansible-playbook -i ${aws_instance.ec2-server.private_ip}, --private-key ${local.key} bank-playbook.yml"
   }
