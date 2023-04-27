@@ -21,4 +21,4 @@ resource "aws_instance" "ec2-server" {
   provisioner "local-exec" {
     command = "ansible-playbook /var/lib/jenkins/workspace/project/bank-playbook.yml "
   }
-
+}
