@@ -48,7 +48,8 @@ pipeline {
             }
      stage('ansible'){
          steps{
-ansiblePlaybook credentialsId: 'key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/project/inventory', playbook: 'bank-playbook.yml}
+ansiblePlaybook credentialsId: 'key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/project/inventory', playbook: 'bank-playbook.yml
 }
    }
+}
 }
