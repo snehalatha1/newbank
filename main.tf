@@ -1,6 +1,3 @@
-locals {
-  key = "mykey.pem"
-}
 provider "aws" {
  region = "ap-south-1"
 }
@@ -14,14 +11,11 @@ resource "aws_instance" "ec2-server" {
     connection {
       type     = "ssh"
       user     = "ubuntu"
-      private_key = file(local.key)
+      private_key = file("mykey.pem")
       host  =  aws_instance.ec2-server.public_ip
     }
   }
   tags = {
     Name = "terraform"
-  }
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.ec2-server.private_ip}, --private-key ${local.key} bank-playbook.yml"
   }
 }
