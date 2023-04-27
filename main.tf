@@ -10,6 +10,7 @@ resource "aws_instance" "ec2-server" {
   key_name = "mykey"
   vpc_security_group_ids= ["sg-00fd2fb52aa7dd027"]
   provisioner "remote-exec" { 
+    inline = ["echo 'waituntil ssh is ready'"]
     connection {
       type     = "ssh"
       user     = "ubuntu"
