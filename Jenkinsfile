@@ -46,5 +46,10 @@ pipeline {
                 sh 'terraform apply --auto-approve'
                 }
             }
+     stage('ansible'){
+         steps{
+ansiblePlaybook credentialsId: 'an', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/project/inventory', playbook: 'bank-playbook.yml'
     }
         }
+}
+}
